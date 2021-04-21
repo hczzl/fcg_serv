@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glch.estateRegister.mapper.EstateRegisterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.glch.estateRegister.entity.EstateRegister">
+        <id column="id" property="id"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_update_user" property="lastUpdateUser"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="addrress" property="addrress"/>
+        <result column="cardId" property="cardId"/>
+        <result column="tel" property="tel"/>
+        <result column="owner" property="owner"/>
+        <result column="owner_name" property="ownerName"/>
+        <result column="owner_cardId" property="ownerCardid"/>
+        <result column="owner_tel" property="ownerTel"/>
+        <result column="work" property="work"/>
+        <result column="xqsheng" property="xqsheng"/>
+        <result column="xqshi" property="xqshi"/>
+        <result column="xqxian" property="xqxian"/>
+        <result column="xqmc" property="xqmc"/>
+        <result column="xqxz" property="xqxz"/>
+        <result column="building" property="building"/>
+        <result column="unit_number" property="unitNumber"/>
+        <result column="room_number" property="roomNumber"/>
+        <result column="house_type" property="houseType"/>
+        <result column="house_use" property="houseUse"/>
+        <result column="live_type" property="liveType"/>
+        <result column="remark" property="remark"/>
+        <result column="state" property="state"/>
+        <result column="image_path" property="imagePath"/>
+        <result column="estate_id" property="estateId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        creator,
+        create_time AS createTime,
+        last_update_user AS lastUpdateUser,
+        last_update_time AS lastUpdateTime,
+        id, name, cardId, tel, owner, owner_name AS ownerName, owner_cardId AS ownerCardid, owner_tel AS ownerTel, work, xqsheng, xqshi, xqxian, xqmc, xqxz, building, unit_number AS unitNumber, room_number AS roomNumber, house_type AS houseType, house_use AS houseUse, live_type AS liveType, remark, state
+    </sql>
+
+    <select id="queryList" parameterType="Map" resultMap="BaseResultMap">
+        select * from t_estate_register
+        where 1 = 1
+        <if test="keyWord != null and keyWord != ''">
+            and ( name like CONCAT('%', #{keyWord} , '%') or cardId like CONCAT('%', #{keyWord} , '%') )
+        </if>
+        <if test="estateId != null">
+            and estate_id = #{estateId}
+        </if>
+        <if test="beginTime != null and beginTime != ''">
+            and create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and create_time &lt;= #{endTime}
+        </if>
+        order by create_time desc
+    </select>
+    <select id="selectList" parameterType="com.glch.estateRegister.entity.vo.RegisVo" resultType="Map">
+         select t.id,t.name, case t.gender when 1 then '男' when 2 then '女' when 9 then '未说明' end as gender,
+				t.birthday,t.addrress,t.cardId,t.tel,if(t.owner=0,'否','是')as owner,t.owner_name as ownerName,
+				t.owner_cardId as ownerCardId,
+				t.owner_tel as ownerTel,t.work,t.estate_id as estateId,t.xqsheng,xqshi,t.xqxian,t.xqmc,t.xqxz,
+				t.building,t.unit_number as unitNumber,t.room_number as roomNumber,
+                t.house_type as houseType,t.house_use as houseUse,t.live_type as liveType,t.remark,if(t.state=0,'正常','删除')as state,
+                (select t2.name from t_user t2 where t2.id = t.creator)as creator,t.create_time as createTime,
+                image_path as imagePath
+        from t_estate_register t
+        where 1 =1
+        <if test="name !=null and name !=''">and t.name like concat('%',#{name},'%')</if>
+        <if test="xqmc !=null and xqmc !=''">and t.xqmc like concat('%',#{xqmc},'%')</if>
+        <if test="startTime !=null and startTime !=''">and t.create_time &gt;= #{startTime}</if>
+        <if test="endTime !=null and endTime !=''">and t.create_time &lt;= #{endTime}</if>
+        order by t.create_time desc
+        limit #{pageSize}
+    </select>
+</mapper>

@@ -1,0 +1,4 @@
+2020-09-10 08:21:15.818 [restartedMain] ERROR o.a.c.core.AprLifecycleListener[180]-[] -An incompatible version [1.1.27] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-09-10 08:21:17.089 [restartedMain] ERROR o.a.c.core.AprLifecycleListener[180]-[] -An incompatible version [1.1.27] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-09-10 08:21:17.131 [restartedMain] ERROR o.a.c.core.AprLifecycleListener[180]-[] -An incompatible version [1.1.27] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2020-09-10 08:21:17.176 [localhost-startStop-1] ERROR o.a.c.core.AprLifecycleListener[180]-[] -An incompatible version [1.1.27] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]

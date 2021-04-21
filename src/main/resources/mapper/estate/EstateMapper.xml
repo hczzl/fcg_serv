@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glch.estate.mapper.EstateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.glch.estate.entity.Estate">
+        <id column="id" property="id" />
+        <result column="creator" property="creator" />
+        <result column="last_update_user" property="lastUpdateUser" />
+        <result column="last_update_time" property="lastUpdateTime" />
+        <result column="cityproper" property="cityproper" />
+        <result column="city_code" property="cityCode" />
+        <result column="estate_name" property="estateName" />
+        <result column="addr_lng" property="addrLng" />
+        <result column="addr_lat" property="addrLat" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        creator,
+        last_update_user AS lastUpdateUser,
+        last_update_time AS lastUpdateTime,
+        id, cityproper, city_code AS cityCode, estate_name AS estateName, addr_lng AS addrLng, addr_lat AS addrLat, create_time as createTime
+    </sql>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from t_estate where estate_name like CONCAT('%', #{xqmc} , '%')
+    </select>
+
+</mapper>

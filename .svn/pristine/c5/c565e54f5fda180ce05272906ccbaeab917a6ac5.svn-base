@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.glch.system.role.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.glch.system.role.entity.Role">
+        <id column="id" property="id" />
+        <result column="creator" property="creator" />
+        <result column="create_time" property="createTime" />
+        <result column="last_update_user" property="lastUpdateUser" />
+        <result column="last_update_time" property="lastUpdateTime" />
+        <result column="name" property="name" />
+        <result column="role_no" property="roleNo" />
+        <result column="description" property="description" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        creator,
+        create_time AS createTime,
+        last_update_user AS lastUpdateUser,
+        last_update_time AS lastUpdateTime,
+        id, name, role_no AS roleNo, description, state
+    </sql>
+
+</mapper>
